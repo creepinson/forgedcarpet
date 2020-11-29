@@ -38,7 +38,6 @@ class ServerPlayNetHandlerMixin {
         method = ["processVehicleMove"],
         at = [At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/network/ServerPlayerEntity;isSleeping()Z",
             shift = At.Shift.BEFORE
         )]
     )

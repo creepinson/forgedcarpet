@@ -7,3 +7,6 @@ It currently adds a configurable tick speed setting, and a command to dynamicall
 I plan on adding a way to change piston block limits, but keep in mind that I am in school and 
 that I am probably not going to port everything from this mod. However, contributions are welcome.
 
+## Demos
+
+![Death Demo](assets/death_demo.mp4)
