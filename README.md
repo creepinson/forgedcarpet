@@ -9,4 +9,4 @@ that I am probably not going to port everything from this mod. However, contribu
 
 ## Demos
 
-![Death Demo](assets/death_demo.mp4)
+![Death Demo](assets/death_demo.gif)
