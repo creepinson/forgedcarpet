@@ -6,21 +6,21 @@ loaderVersion="[1.6,)" # Require at least 1.6.x
 license='LGPL'
 
 [[mods]]
-modId="examplemod"
+modId="forgedcarpet"
 version="${file.jarVersion}"
-displayName="ExampleMod"
-credits="The ExampleMod dev team"
-authors="ExampleModAuthor"
+displayName="Forged Carpet"
+credits=""
+authors="Theo Paris"
 description='''
-Example mod that uses Kotlin for Forge.
+
 '''
-[[dependencies.examplemod]]
+[[dependencies.forgedcarpet]]
     modId="forge"
     mandatory=true
     versionRange="[31.2,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.examplemod]]
+[[dependencies.forgedcarpet]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.3]"

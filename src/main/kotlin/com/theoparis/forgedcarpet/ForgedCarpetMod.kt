@@ -1,9 +1,10 @@
-package example.examplemod
+package com.theoparis.forgedcarpet
 
-import example.examplemod.block.ModBlocks
+import com.theoparis.forgedcarpet.command.TickRateCommand
+import net.minecraftforge.event.RegisterCommandsEvent
+import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -17,23 +18,26 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
  *
  * An example for blocks is in the `blocks` package of this mod.
  */
-@Mod(ExampleMod.ID)
-object ExampleMod {
+@Mod(ForgedCarpetMod.ID)
+object ForgedCarpetMod {
     // the modid of our mod
-    const val ID: String = "examplemod"
+    const val ID: String = "forgedcarpet"
 
     // the logger for our mod
-    val LOGGER: Logger = LogManager.getLogger()
+    val logger: Logger = LogManager.getLogger()
 
     init {
-        LOGGER.log(Level.INFO, "Hello world!")
-
-        // Register the KDeferredRegister to the mod-specific event bus
-        ModBlocks.REGISTRY.register(MOD_BUS)
+        logger.log(Level.INFO, "Hello world!")
 
         // usage of the KotlinEventBus
-        MOD_BUS.addListener(::onClientSetup)
-        FORGE_BUS.addListener(::onServerAboutToStart)
+        MOD_BUS.addListener(ForgedCarpetMod::onClientSetup)
+        FORGE_BUS.addListener(EventHandler::onShift)
+        FORGE_BUS.addListener(ForgedCarpetMod::registerCommands)
+    }
+
+    @SubscribeEvent
+    fun registerCommands(event: RegisterCommandsEvent) {
+        TickRateCommand.register(event.dispatcher)
     }
 
     /**
@@ -42,13 +46,6 @@ object ExampleMod {
      * Fired on the mod specific event bus.
      */
     private fun onClientSetup(event: FMLClientSetupEvent) {
-        LOGGER.log(Level.INFO, "Initializing client...")
-    }
-
-    /**
-     * Fired on the global Forge bus.
-     */
-    private fun onServerAboutToStart(event: FMLServerAboutToStartEvent) {
-        LOGGER.log(Level.INFO, "Server starting...")
+        logger.log(Level.INFO, "Initializing client...")
     }
 }

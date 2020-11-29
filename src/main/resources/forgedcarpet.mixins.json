@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.theoparis.forgedcarpet.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MinecraftServerMixin",
+    "ServerPlayNetHandlerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

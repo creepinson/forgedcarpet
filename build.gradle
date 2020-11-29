@@ -12,16 +12,17 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
+apply plugin: 'idea'
 
-version = '1.0.0'
-group = 'example.examplemod'
-archivesBaseName = 'examplemod'
+version = MODVERSION
+group = "com.theoparis.${MODID}"
+archivesBaseName = MODID
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
     // Change to your preferred mappings
-    mappings channel: 'snapshot', version: '20200916-1.16.2'
+    mappings channel: 'snapshot', version: '20201028-1.16.3'
     // Add your AccessTransformer
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -31,8 +32,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
+            args "--mixin", "forgedcarpet.mixins.json"
+
             mods {
-                examplemod {
+                forgedcarpet {
                     source sourceSets.main
                 }
             }
@@ -44,7 +47,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                forgedcarpet {
                     source sourceSets.main
                 }
             }
@@ -55,10 +58,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+            args '--mod', MODID, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
             mods {
-                examplemod {
+                forgedcarpet {
                     source sourceSets.main
                 }
             }
@@ -71,14 +74,17 @@ repositories {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
+    maven {
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
-    // Use the latest version of Minecraft Forge
-    minecraft 'net.minecraftforge:forge:1.16.3-34.1.22'
+    // Use the latest version of Mginecraft Forge
+    minecraft 'net.minecraftforge:forge:1.16.4-35.0.18'
 
     // Use the latest version of KotlinForForge
-    fg.deobf(implementation('thedarkcolour:kotlinforforge:1.6.2'))
+    implementation 'thedarkcolour:kotlinforforge:1.6.2'
 }
 
 compileKotlin {
@@ -89,20 +95,26 @@ compileKotlin {
     }
 }
 
-// Optional (include assets and data from 'generated' folder)
-sourceSets.main.resources {
-    srcDirs 'src/generated/resources/'
+sourceSets {
+    main {
+        resources {
+            srcDirs 'src/generated/resources/'
+        }
+    }
 }
+
+// Optional (include assets and data from 'generated' folder)
+sourceSets.main
 
 jar {
     manifest {
         attributes([
-                "Specification-Title": "examplemod",
-                "Specification-Vendor": "examplemodsareus",
-                "Specification-Version": "1", // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"examplemodsareus",
+                "Specification-Title"     : MODID,
+                "Specification-Vendor"    : "Theo Paris",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${MODVERSION}",
+                "Implementation-Vendor"   : "Theo Paris",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
