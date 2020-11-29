@@ -20,6 +20,12 @@ archivesBaseName = MODID
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
+sourceSets {
+    main.java.srcDirs = ["src/main/kotlin"]
+    main.kotlin.srcDirs = ['src/main/kotlin']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
 minecraft {
     // Change to your preferred mappings
     mappings channel: 'snapshot', version: '20201028-1.16.3'

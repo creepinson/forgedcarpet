@@ -11,18 +11,44 @@ import java.util.function.BiConsumer
 
 object TickSpeed {
     const val PLAYER_GRACE = 2
+
+    @JvmField
     var tickRate = 20.0f
+
+    @JvmField
     var mspt = 50.0f
+
+    @JvmField
     var time_bias: Long = 0
+
+    @JvmField
     var time_warp_start_time: Long = 0
+
+    @JvmField
     var time_warp_scheduled_ticks: Long = 0
+
+    @JvmField
     var time_advancerer: ServerPlayerEntity? = null
+
+    @JvmField
     var tick_warp_callback: String? = null
+
+    @JvmField
     var tick_warp_sender: CommandSource? = null
+
+    @JvmField
     var player_active_timeout = 0
+
+    @JvmField
     var process_entities = true
+
+    @JvmField
     var deepFreeze = false
+
+    @JvmField
     var is_paused = false
+
+    @JvmField
     var isSuperhot = false
 
     /**
@@ -103,9 +129,11 @@ object TickSpeed {
                 if (time_advancerer != null) {
                     Messenger.m(
                         time_advancerer!!.commandSource,
-                        "r Command Callback failed - unknown error: ",
-                        "rb /$tick_warp_callback",
-                        "/$tick_warp_callback"
+                        Messenger.compose(
+                            "r Command Callback failed - unknown error: ",
+                            "rb /$tick_warp_callback",
+                            "/$tick_warp_callback"
+                        )
                     )
                 }
             }

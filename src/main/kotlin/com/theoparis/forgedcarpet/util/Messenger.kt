@@ -10,9 +10,16 @@ import net.minecraft.world.World
 
 object Messenger {
     // message source
-    fun m(source: CommandSource?, vararg fields: Any?) {
+    fun m(source: CommandSource?, msg: ITextComponent) {
         source?.sendFeedback(
-            compose(fields),
+            msg,
+            source.server.getWorld(World.OVERWORLD) != null
+        )
+    }
+
+    fun m(source: CommandSource?, msg: String) {
+        source?.sendFeedback(
+            StringTextComponent(msg),
             source.server.getWorld(World.OVERWORLD) != null
         )
     }

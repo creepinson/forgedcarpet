@@ -1,9 +1,12 @@
 package com.theoparis.forgedcarpet
 
-import com.theoparis.forgedcarpet.command.TickRateCommand
+import com.theoparis.forgedcarpet.command.CarpetCommand
+import com.theoparis.forgedcarpet.config.Config
 import net.minecraftforge.event.RegisterCommandsEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.config.ModConfig
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
@@ -28,6 +31,7 @@ object ForgedCarpetMod {
 
     init {
         logger.log(Level.INFO, "Hello world!")
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         // usage of the KotlinEventBus
         MOD_BUS.addListener(ForgedCarpetMod::onClientSetup)
@@ -37,7 +41,7 @@ object ForgedCarpetMod {
 
     @SubscribeEvent
     fun registerCommands(event: RegisterCommandsEvent) {
-        TickRateCommand.register(event.dispatcher)
+        CarpetCommand.register(event.dispatcher)
     }
 
     /**
